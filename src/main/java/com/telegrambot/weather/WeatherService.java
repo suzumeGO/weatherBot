@@ -4,10 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.telegrambot.weather.DTO.Forecast;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.fluent.Request;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @Service
@@ -18,12 +18,11 @@ public class WeatherService {
                         "lang=" + "ru_RU")
                 .setHeader("X-Yandex-API-Key", key)
                 .connectTimeout(60000)
-                .execute().returnContent().asString();
+                .execute().returnContent().asString(StandardCharsets.UTF_8);
     }
 
     public Forecast getCurrentWeather(double lat, double lon, String key) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
-        log.info(getData(lat, lon, key));
         return mapper.readValue(getData(lat, lon, key), Forecast.class);
     }
 
