@@ -7,6 +7,7 @@ import org.apache.http.client.fluent.Request;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
@@ -20,6 +21,12 @@ public class WeatherService {
                 .connectTimeout(60000)
                 .execute().returnContent().asString(StandardCharsets.UTF_8);
     }
+
+//    public InputStream getIcon(String icon) throws IOException {
+//        return Request.Get("https://yastatic.net/weather/i/icons/funky/dark/"+icon+".svg")
+//                .connectTimeout(60000)
+//                .execute().returnContent().asStream();
+//    }
 
     public Forecast getCurrentWeather(double lat, double lon, String key) throws IOException {
         ObjectMapper mapper = new ObjectMapper();

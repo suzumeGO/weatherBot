@@ -33,6 +33,7 @@ public class Bot extends TelegramLongPollingBot implements BotCommands {
     @Autowired
     WeatherService service;
 
+
     @Autowired
     public Bot(BotConfig config) {
         this.config = config;
